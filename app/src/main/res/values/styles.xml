@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/white</item><!--背景-->
+        <item name="android:textColorPrimary">@color/white</item><!--上方左边字体颜色-->
+        <item name="windowActionBar">false</item><!--去除ActionBar-->
+        <item name="windowNoTitle">true</item><!--去除顶部标题-->
     </style>
 
 </resources>
