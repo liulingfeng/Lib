@@ -17,10 +17,12 @@
         <activity android:name=".design.ToolbarActivity"
             android:screenOrientation="portrait"
             >
-
         </activity>
 
         <activity android:name=".design.CoordinatorActivity">
+        </activity>
+
+        <activity android:name=".design.AppBarLayoutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
