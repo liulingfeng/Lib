@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.llf.lib.recycle.BaseAdapter;
@@ -24,14 +22,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private List<String> datas = new ArrayList<>();
     //下拉刷新
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    //添加头部
-    private LinearLayout headView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        headView = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.headview_demo,null);
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(manager);
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         };
         mRecyclerView.setAdapter(mBaseAdapter);
         mBaseAdapter.setDatas(datas);
-        mBaseAdapter.setHeadView(headView);
+        mBaseAdapter.setHeadView(R.layout.headview_demo);
         mBaseAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onClick(int positon) {
