@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.llf.lib"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -27,5 +27,7 @@ dependencies {
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:design:23.0.0'
+    compile 'com.orhanobut:logger:1.15'
+    compile files('libs/HwPush_SDK_V2705.jar')
 }
