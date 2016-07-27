@@ -1,7 +1,7 @@
 package com.llf.lib;
 
 import android.app.Application;
-import com.llf.lib.imageloaderreal.UniversalImageLoaderStractery;
+import com.llf.lib.imageloader.UniversalImageLoaderStractery;
 
 /**
  * Created by llf on 2016/7/21.
