@@ -22,7 +22,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     private final static int TYPE_HEAD = 0;
     private final static int TYPE_Normal = 1;
-    private View headView;
+    private int headViewRes;
 
     public BaseAdapter(Context context, int itemId) {
         this.itemId = itemId;
@@ -37,7 +37,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public int getItemViewType(int position) {
-        if (headView == null) return TYPE_Normal;
+        if (headViewRes == 0) return TYPE_Normal;
         if (position == 0) return TYPE_HEAD;
         return TYPE_Normal;
     }
@@ -45,8 +45,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         BaseViewHolder viewHolder;
-        if (headView != null && viewType == TYPE_HEAD) {
-            viewHolder = new BaseViewHolder(headView);
+        if (headViewRes != 0 && viewType == TYPE_HEAD) {
+            viewHolder = new BaseViewHolder(LayoutInflater.from(mContext).inflate(headViewRes, parent, false));
         } else {
             viewHolder = new BaseViewHolder(LayoutInflater.from(mContext).inflate(itemId, parent, false));
         }
@@ -60,11 +60,11 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
             @Override
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onClick(headView == null ? position : position + 1);
+                    mOnItemClickListener.onClick(headViewRes == 0 ? position : position - 1);
                 }
             }
         });
-        convert(holder, datas.get(headView == null ? position : position + 1));
+        convert(holder, datas.get(headViewRes == 0 ? position : position - 1));
     }
 
     public abstract void convert(BaseViewHolder viewHolder, T item);
@@ -77,14 +77,14 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    public void setHeadView(View headView) {
-        this.headView = headView;
+    public void setHeadView(int headViewRes) {
+        this.headViewRes = headViewRes;
         notifyItemInserted(0);
     }
 
     @Override
     public int getItemCount() {
-        return headView == null ? datas.size() : datas.size() + 1;
+        return headViewRes == 0 ? datas.size() : datas.size() + 1;
     }
 
     @Override
@@ -119,7 +119,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     }
 
     public void removeHeadView(){
-        if(headView != null)
+        if(headViewRes != 0)
         notifyItemRemoved(0);
     }
 }

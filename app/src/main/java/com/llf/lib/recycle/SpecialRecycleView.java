@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.View;
 
 /**
  * Created by llf on 2016/7/27.
@@ -23,10 +22,10 @@ public class SpecialRecycleView extends RecyclerView{
         super(context, attrs, defStyle);
     }
 
-    public void addHeadView(View headView){
+    public void addHeadView(int headViewRes){
         if(getAdapter() instanceof BaseAdapter){
             BaseAdapter adapter = (BaseAdapter) getAdapter();
-            adapter.setHeadView(headView);
+            adapter.setHeadView(headViewRes);
         }
     }
 
