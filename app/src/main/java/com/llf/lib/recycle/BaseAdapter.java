@@ -3,6 +3,7 @@ package com.llf.lib.recycle;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
     }
 
     public void setDatas(List<T> datas){
-        datas.addAll(datas);
+        this.datas.addAll(datas);
         notifyDataSetChanged();
     }
 
@@ -37,14 +38,14 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, final int position) {
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(mOnItemClickListener!=null){
-//                    mOnItemClickListener.onClick(position);
-//                }
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mOnItemClickListener!=null){
+                    mOnItemClickListener.onClick(position);
+                }
+            }
+        });
         convert(holder,datas.get(position));
     }
     public abstract void convert(BaseViewHolder viewHolder,T item);

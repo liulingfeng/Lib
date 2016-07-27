@@ -6,14 +6,18 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.llf.lib.recycle.BaseAdapter;
 import com.llf.lib.recycle.BaseViewHolder;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private BaseAdapter mBaseAdapter;
-    private ArrayList<String> datas = new ArrayList<>();
+    private List<String> datas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        for(int i=0;i<20;i++){
+        for(int i=0;i<25;i++){
             datas.add("帅帅的");
         }
 
@@ -39,5 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(mBaseAdapter);
         mBaseAdapter.setDatas(datas);
+        mBaseAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int positon) {
+                Toast.makeText(MainActivity.this, positon + "", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
