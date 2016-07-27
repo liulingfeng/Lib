@@ -1,24 +1,27 @@
 package com.llf.lib;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.llf.lib.recycle.BaseAdapter;
 import com.llf.lib.recycle.BaseViewHolder;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * RecyclerView深入浅出
+ */
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
     private BaseAdapter mBaseAdapter;
     private List<String> datas = new ArrayList<>();
-
+    //下拉刷新
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 tv.setText(item);
             }
         };
-
         mRecyclerView.setAdapter(mBaseAdapter);
         mBaseAdapter.setDatas(datas);
         mBaseAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
@@ -49,5 +51,31 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, positon + "", Toast.LENGTH_SHORT).show();
             }
         });
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                switch (newState){
+                    case RecyclerView.SCROLL_STATE_IDLE:
+                        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                        int totalItemCount = layoutManager.getItemCount();
+                        int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+                        if(lastVisibleItem == totalItemCount-1){
+                            Toast.makeText(MainActivity.this, "加载更多", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+            }
+        });
+        //下拉刷新
+        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe);
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }
