@@ -1,0 +1,7 @@
+
+ublish/subscribe消息总线
+
+1.避免Intent出现传值与取值得类型不一致
+2.比BroadCast更加简洁优雅
+3.去除监听器的强强联合
+4.可以作为Frgament和Activity的数据通信

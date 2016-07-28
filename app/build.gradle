@@ -29,5 +29,8 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:design:23.0.0'
     compile 'com.orhanobut:logger:1.15'
-    compile files('libs/HwPush_SDK_V2705.jar')
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okio:okio:1.5.0'
+    compile 'org.greenrobot:eventbus:3.0.0' //EventBus事件分发器
+    compile 'com.alibaba:fastjson:1.2.12' //json解析
 }
