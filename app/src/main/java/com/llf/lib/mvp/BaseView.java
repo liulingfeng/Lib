@@ -5,4 +5,5 @@ package com.llf.lib.mvp;
  */
 public interface BaseView<T> {
     void setPresenter(T presenter);
+    boolean isActive();
 }
