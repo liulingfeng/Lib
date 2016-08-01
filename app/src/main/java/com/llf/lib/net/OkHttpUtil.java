@@ -71,6 +71,17 @@ public class OkHttpUtil {
         deliveryResult(callback, request);
     }
 
+    //菜谱,零时使用
+    public void cook(String url,String menu,String key,StringCallback callback){
+        Request request = null;
+        FormEncodingBuilder builder = new FormEncodingBuilder();
+        builder.add("menu", menu);
+        builder.add("key", key);
+            request = new Request.Builder().cacheControl(CacheControl.FORCE_NETWORK).url(url).post(builder.build())
+                    .build();
+        deliveryResult(callback, request);
+
+    }
     // get请求
     public void getAsyn(String url, boolean hasnet, StringCallback callback) {
         Log.e(TAG, "get方式");
