@@ -1,6 +1,7 @@
 package com.llf.lib.mvp.login;
 
 import android.text.TextUtils;
+import com.llf.lib.mvp.data.ServiceControl;
 import com.llf.lib.net.OkHttpUtil;
 import com.squareup.okhttp.Request;
 import java.io.IOException;
@@ -35,10 +36,10 @@ public class LoginPresenter implements LoginContract.Presenter{
     public void toLogin(String userName,String passWord) {
         if(check(userName,passWord)){
             view.showLoading();
-            OkHttpUtil.getInstanse().cook("http://apis.juhe.cn/cook/query.php", "秘制红烧肉", "273c2928ac2cf691d8f6d3372da48b23", new OkHttpUtil.StringCallback() {
+            ServiceControl.cookQuery("http://apis.juhe.cn/cook/query.php", "秘制红烧肉", "273c2928ac2cf691d8f6d3372da48b23", new OkHttpUtil.StringCallback() {
                 @Override
                 public void onFailure(Request request, IOException e) {
-                    view.hideLoading();
+
                 }
 
                 @Override
