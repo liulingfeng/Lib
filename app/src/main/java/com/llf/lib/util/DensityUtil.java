@@ -11,7 +11,7 @@ public class DensityUtil {
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dip2px(Context context, float dpValue) {
-        //获取相对于160的屏幕密度
+        //这个得到的不应该叫做密度，应该是密度的一个比例，在160dpi手机上这个值是1,dpi屏幕像素密度（是基准）
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
