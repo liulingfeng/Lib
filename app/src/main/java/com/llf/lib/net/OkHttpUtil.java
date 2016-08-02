@@ -71,33 +71,17 @@ public class OkHttpUtil {
         deliveryResult(callback, request);
     }
 
-    //菜谱,零时使用
-    public void cook(String url,String menu,String key,StringCallback callback){
-        Request request = null;
-        FormEncodingBuilder builder = new FormEncodingBuilder();
-        builder.add("menu", menu);
-        builder.add("key", key);
-            request = new Request.Builder().cacheControl(CacheControl.FORCE_NETWORK).url(url).post(builder.build())
-                    .build();
+    public void postAsyn(String url,FormEncodingBuilder builder,StringCallback callback){
+        Request request = new Request.Builder().url(url).post(builder.build()).build();
         deliveryResult(callback, request);
-
     }
+
     // get请求
     public void getAsyn(String url, boolean hasnet, StringCallback callback) {
         Log.e(TAG, "get方式");
         Request request = new Request.Builder().url(url).get().addHeader("apix-key", "34af394c0f464371731fe585061dab9f")
                 .build();
         deliveryResult(callback, request);
-    }
-
-    // post请求
-    public void getPostAsyn(String url, String sessionid,Callback callback) {
-        Log.e(TAG, "post方式");
-        FormEncodingBuilder builder = new FormEncodingBuilder();
-        builder.add("sessionid", sessionid);
-        Request request = new Request.Builder().url(url).post(builder.build()).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(callback);
     }
 
     // 上传文件
