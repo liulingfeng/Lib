@@ -14,4 +14,11 @@ public class ServiceControl {
         builder.add("key",key);
         OkHttpUtil.getInstanse().postAsyn(url,builder,callback);
     }
+
+    public static void forecast(String url, String cityname, String key, OkHttpUtil.StringCallback callback){
+        FormEncodingBuilder builder = HttpHeader.initFormEncodingBuilder();
+        builder.add("cityname",cityname);
+        builder.add("key",key);
+        OkHttpUtil.getInstanse().postAsyn(url,builder,callback);
+    }
 }
