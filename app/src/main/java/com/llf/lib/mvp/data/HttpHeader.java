@@ -7,6 +7,7 @@ import com.squareup.okhttp.FormEncodingBuilder;
  * 公共的参数集成到这里
  */
 public class HttpHeader {
+    public static String cookingUrl = "http://apis.juhe.cn/cook/query.php";
     static {
         //这边获取公共的参数
     }
