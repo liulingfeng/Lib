@@ -16,6 +16,8 @@ public class SpecailListView extends ListView{
     private Context mContext;
     private LinearLayout itemRoot;
     private int mlastX = 0;
+    private LinearLayout mPreScrollView;//上一次滑动的View
+    private int maxLength;
 
     public SpecailListView(Context context) {
         this(context,null);
@@ -29,12 +31,11 @@ public class SpecailListView extends ListView{
         super(context, attrs, defStyleAttr);
 
         mContext = context;
+        maxLength = DensityUtil.dip2px(mContext, 96);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int maxLength = DensityUtil.dip2px(mContext, 96);
-
         int x = (int) event.getX();
         int y = (int) event.getY();
 
@@ -45,6 +46,10 @@ public class SpecailListView extends ListView{
                 if (position != INVALID_POSITION) {
                     MergeListAdapter.DataHolder data = (MergeListAdapter.DataHolder) getItemAtPosition(position);
                     itemRoot = data.rootView;
+                }
+
+                if(mPreScrollView!=null){
+                    mPreScrollView.scrollTo(0,0);
                 }
             }
             case MotionEvent.ACTION_MOVE: {
@@ -59,6 +64,7 @@ public class SpecailListView extends ListView{
             }
             break;
             case MotionEvent.ACTION_UP: {
+                mPreScrollView = itemRoot;
                 int scrollX = itemRoot.getScrollX();
                 int newScrollX = scrollX + mlastX - x;
                 if (scrollX > maxLength / 2) {
@@ -74,4 +80,5 @@ public class SpecailListView extends ListView{
         mlastX = x;
         return super.onTouchEvent(event);
     }
+
 }
