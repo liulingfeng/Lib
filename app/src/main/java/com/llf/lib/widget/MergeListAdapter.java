@@ -18,6 +18,7 @@ public class MergeListAdapter extends BaseAdapter{
     private Context mContext;
     private LayoutInflater mInflater;
     private List<DataHolder> mDataList = new ArrayList<>();
+    private DeleteLisener lisener;
 
     public MergeListAdapter(Context context, List<DataHolder> dataList) {
         mContext = context;
@@ -43,12 +44,13 @@ public class MergeListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null || convertView.getTag() == null) {
             convertView = mInflater.inflate(R.layout.item_delete, parent, false);
             holder = new ViewHolder();
             holder.title = (TextView) convertView.findViewById(R.id.title);
+            holder.delete_tv = (TextView)convertView.findViewById(R.id.delete_tv);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -58,15 +60,31 @@ public class MergeListAdapter extends BaseAdapter{
         holder.title.setText(item.title);
         item.rootView = (LinearLayout)convertView.findViewById(R.id.lin_root);
         item.rootView.scrollTo(0,0);
+
+//        holder.delete_tv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ((DeleteLisener)mContext).onItemDeleteClick(position);
+//            }
+//        });
         return convertView;
     }
 
     private static class ViewHolder {
-        public TextView title;
+        private TextView title;
+        private TextView delete_tv;
     }
 
     public static class DataHolder {
         public String title;
         public LinearLayout rootView;
+    }
+
+    public interface DeleteLisener{
+        void onItemDeleteClick(int position);
+    }
+
+    public void setDeleteListener(DeleteLisener lisener){
+        this.lisener = lisener;
     }
 }
