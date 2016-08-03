@@ -33,7 +33,7 @@ public class SpecailListView extends ListView{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int maxLength = DensityUtil.px2dip(mContext, 200);
+        int maxLength = DensityUtil.dip2px(mContext, 96);
 
         int x = (int) event.getX();
         int y = (int) event.getY();
