@@ -48,6 +48,10 @@
             android:name=".mvp.login.LoginActivity"
             android:screenOrientation="portrait"
             >
+
+        </activity>
+
+        <activity android:name=".DeleteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
